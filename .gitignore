@@ -1,0 +1,8 @@
+node_modules/
+.env
+.DS_Store
+npm-debug.log*
+
+# Credenciales MongoDB Atlas
+atlas-credentials.env
+db_user
