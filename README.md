@@ -986,3 +986,57 @@ curl -i -X DELETE http://localhost:3000/eventos/000000000000000000000000
 
 **Resultado:** prueba superada. La API devuelve HTTP 404 y el mensaje de error establecido en el enunciado cuando se intenta eliminar un evento inexistente. El evento existente permanece disponible.
 
+### Prueba 26. DELETE /eventos/:id — Eliminación de evento existente
+
+**Objetivo:** comprobar que la API permite eliminar un evento existente en MongoDB Atlas.
+
+**1. Creación de un evento temporal**
+
+Para conservar el evento principal, se crea un evento específico para comprobar su eliminación.
+
+**Petición:**
+
+```bash
+curl -i -X POST http://localhost:3000/eventos \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nombre": "Evento Temporal de Pruebas",
+    "fecha": "2026-12-28T18:00:00.000Z",
+    "entradas": [
+      {
+        "tipo": "General",
+        "precio": 10,
+        "disponibles": 50
+      }
+    ],
+    "recinto": "6aff5e1da0b04067fccec036"
+  }'
+```
+
+**Respuesta:** HTTP `201 Created`, con `ok: true`.
+
+**Identificador generado:** `6aff6659a0b04067fccec04e`.
+
+![Prueba 26 - Creación del evento temporal](img/prueba26-post-evento-temporal.png)
+
+**2. Eliminación del evento temporal**
+
+**Petición:**
+
+```bash
+curl -i -X DELETE http://localhost:3000/eventos/6aff6659a0b04067fccec04e
+```
+
+**Respuesta obtenida:**
+
+- Código HTTP: `200 OK`.
+- `ok: true`.
+- `resultado`: objeto con los datos del evento eliminado.
+
+**Evidencia de la ejecución:**
+
+![Prueba 26 - Eliminación del evento temporal](img/prueba26-delete-evento.png)
+
+**Resultado:** prueba superada. La API elimina correctamente el evento temporal y devuelve sus datos, con HTTP 200 y la estructura JSON prevista. El evento principal se conserva.
+
+
