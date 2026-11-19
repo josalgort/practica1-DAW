@@ -171,3 +171,178 @@ curl -i -X POST http://localhost:3000/recintos \
 
 ![Prueba 2 - Creación de recinto](img/prueba02-post-recintos.png)
 
+
+
+### Prueba 3. GET /recintos — Consulta de recintos existentes
+
+**Objetivo:** comprobar que la API recupera correctamente los recintos almacenados en MongoDB Atlas.
+
+**Petición:**
+
+```bash
+curl -i http://localhost:3000/recintos
+```
+
+**Respuesta obtenida:**
+
+- Código HTTP: `200 OK`.
+- `ok: true`.
+- `resultado`: array con el recinto registrado.
+
+```json
+{
+  "ok": true,
+  "resultado": [
+    {
+      "_id": "6aff5e1da0b04067fccec036",
+      "nombre": "Palacio de Congresos",
+      "direccion": "Avenida de la Constitución 20",
+      "localidad": "Sevilla",
+      "aforoMaximo": 1500,
+      "__v": 0
+    }
+  ]
+}
+```
+
+**Evidencia de la ejecución:**
+
+![Prueba 3 - Consulta de recintos existentes](img/prueba03-get-recintos.png)
+
+**Resultado:** prueba superada. La API recupera los recintos registrados y devuelve el código HTTP y la estructura JSON establecidos en el enunciado.
+
+
+### Prueba 4. GET /recintos/:id — Consulta por identificador
+
+**Objetivo:** comprobar que la API recupera un recinto concreto mediante su identificador de MongoDB.
+
+**Petición:**
+
+```bash
+curl -i http://localhost:3000/recintos/6aff5e1da0b04067fccec036
+```
+
+**Respuesta obtenida:**
+
+- Código HTTP: `200 OK`.
+- `ok: true`.
+- `resultado`: objeto con los datos del recinto solicitado.
+
+```json
+{
+  "ok": true,
+  "resultado": {
+    "_id": "6aff5e1da0b04067fccec036",
+    "nombre": "Palacio de Congresos",
+    "direccion": "Avenida de la Constitución 20",
+    "localidad": "Sevilla",
+    "aforoMaximo": 1500,
+    "__v": 0
+  }
+}
+```
+
+**Evidencia de la ejecución:**
+
+![Prueba 4 - Consulta de recinto por ID](img/prueba04-get-recinto-id.png)
+
+**Resultado:** prueba superada. La API localiza el recinto mediante su identificador y devuelve la respuesta HTTP y JSON esperada.
+
+
+### Prueba 5. GET /recintos/localidad/:nombre — Consulta por localidad
+
+**Objetivo:** comprobar que la API recupera los recintos registrados en una localidad determinada.
+
+**Petición:**
+
+```bash
+curl -i http://localhost:3000/recintos/localidad/Sevilla
+```
+
+**Respuesta obtenida:**
+
+- Código HTTP: `200 OK`.
+- `ok: true`.
+- `resultado`: array con los recintos de Sevilla.
+
+```json
+{
+  "ok": true,
+  "resultado": [
+    {
+      "_id": "6aff5e1da0b04067fccec036",
+      "nombre": "Palacio de Congresos",
+      "direccion": "Avenida de la Constitución 20",
+      "localidad": "Sevilla",
+      "aforoMaximo": 1500,
+      "__v": 0
+    }
+  ]
+}
+```
+
+**Evidencia de la ejecución:**
+
+![Prueba 5 - Consulta de recintos por localidad](img/prueba05-get-recintos-localidad.png)
+
+**Resultado:** prueba superada. La API filtra correctamente los recintos por localidad y devuelve la respuesta exigida en el enunciado.
+
+
+### Prueba 6. GET /recintos/:id — Recinto inexistente
+
+**Objetivo:** comprobar que la API devuelve el error correspondiente cuando se consulta un recinto que no existe en MongoDB Atlas.
+
+**Petición:**
+
+```bash
+curl -i http://localhost:3000/recintos/000000000000000000000000
+```
+
+**Respuesta obtenida:**
+
+- Código HTTP: `404 Not Found`.
+- `ok: false`.
+
+```json
+{
+  "ok": false,
+  "error": "Recinto 000000000000000000000000 no encontrado"
+}
+```
+
+**Evidencia de la ejecución:**
+
+![Prueba 6 - Consulta de recinto inexistente](img/prueba06-get-recinto-inexistente.png)
+
+**Resultado:** prueba superada. La API identifica que el recinto solicitado no existe y devuelve el código HTTP 404 y el mensaje de error establecidos en el enunciado.
+
+
+### Prueba 7. GET /recintos/localidad/:nombre — Localidad sin recintos
+
+**Objetivo:** comprobar que la API devuelve el error correspondiente cuando no existen recintos registrados en la localidad solicitada.
+
+**Petición:**
+
+```bash
+curl -i http://localhost:3000/recintos/localidad/Valencia
+```
+
+**Respuesta obtenida:**
+
+- Código HTTP: `404 Not Found`.
+- `ok: false`.
+
+```json
+{
+  "ok": false,
+  "error": "No se han encontrado recintos de la localidad indicada"
+}
+```
+
+**Evidencia de la ejecución:**
+
+![Prueba 7 - Localidad sin recintos](img/prueba07-get-recintos-localidad-inexistente.png)
+
+**Resultado:** prueba superada. La API devuelve el código HTTP 404 y el mensaje de error establecidos en el enunciado cuando no existen recintos en la localidad consultada.
+
+
