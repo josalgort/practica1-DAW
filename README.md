@@ -1040,3 +1040,40 @@ curl -i -X DELETE http://localhost:3000/eventos/6aff6659a0b04067fccec04e
 **Resultado:** prueba superada. La API elimina correctamente el evento temporal y devuelve sus datos, con HTTP 200 y la estructura JSON prevista. El evento principal se conserva.
 
 
+## Despliegue de la API REST en Render
+
+**Objetivo:** desplegar la aplicación Node.js y Express en un servicio web público, conectado a MongoDB Atlas.
+
+**Configuración utilizada:**
+
+- Repositorio: `josalgort/practica1-DAW`
+- Rama: `main`
+- Entorno: Node.js
+- Región: Frankfurt (EU Central)
+- Plan: Free (0 $/mes)
+- Build Command: `npm install`
+- Start Command: `npm run start`
+- Base de datos: MongoDB Atlas
+
+**Resultado del despliegue:**
+
+Render confirma que la aplicación se ha iniciado correctamente:
+
+```text
+Conexión con MongoDB establecida correctamente
+Servidor escuchando en el puerto 3000
+==> Your service is live
+```
+
+**Estado:** `Deploy succeeded | Live`
+
+**URL pública:**
+
+https://practica1-daw-2d1i.onrender.com
+
+**Captura del despliegue:**
+
+![Despliegue correcto de la API REST en Render](img/prueba27-render-despliegue.png)
+
+**Resultado:** despliegue realizado correctamente. La aplicación está publicada en Render y ha establecido conexión con MongoDB Atlas.
+
