@@ -98,11 +98,76 @@ Resultado obtenido:
 
 ## 10. Pruebas y despliegue
 
-Pendiente:
 
-- Pruebas de los 13 endpoints.
-- Verificación de respuestas HTTP y JSON.
-- Publicación del repositorio en GitHub.
-- Despliegue de la API en Render.
-- Comprobación de los endpoints en remoto.
+
+### Prueba 1. GET /recintos — Colección vacía
+
+**Objetivo:** comprobar la respuesta de la API cuando no existen recintos registrados.
+
+**1. Arranque del servidor**
+
+Se inicia la aplicación mediante:
+
+```bash
+npm run dev
+```
+
+Se comprueba que el servidor Express escucha en el puerto 3000 y que la conexión con MongoDB Atlas se establece correctamente.
+
+![Arranque del servidor y conexión con MongoDB Atlas](img/prueba00-arranque-servidor.png)
+
+**2. Petición HTTP**
+
+```bash
+curl -i http://localhost:3000/recintos
+```
+
+**3. Respuesta obtenida**
+
+- Código HTTP: `500 Internal Server Error`.
+
+```json
+{
+  "ok": false,
+  "error": "No se han encontrado recintos"
+}
+```
+
+**Evidencia de la ejecución:**
+
+![Prueba 1 - GET recintos sin registros](img/prueba01-get-recintos-vacio.png)
+
+**4. Resultado**
+
+**Prueba superada.** La API responde correctamente cuando la colección de recintos está vacía, devolviendo el código HTTP y el mensaje de error establecidos en el enunciado.
+
+
+
+
+### Prueba 2. POST /recintos — Creación de recinto
+
+**Objetivo:** comprobar la creación de un recinto en MongoDB Atlas.
+
+**Petición:**
+
+```bash
+curl -i -X POST http://localhost:3000/recintos \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nombre": "Palacio de Congresos",
+    "direccion": "Avenida de la Constitución 20",
+    "localidad": "Sevilla",
+    "aforoMaximo": 1500
+  }'
+```
+
+**Resultado obtenido:**
+
+- HTTP 201 Created.
+- `ok: true`.
+- Recinto creado correctamente con identificador `_id` generado por MongoDB.
+
+**Conclusión:** prueba superada. El endpoint permite registrar recintos y devuelve la respuesta exigida.
+
+![Prueba 2 - Creación de recinto](img/prueba02-post-recintos.png)
 
