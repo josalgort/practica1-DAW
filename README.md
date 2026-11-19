@@ -1077,3 +1077,27 @@ https://practica1-daw-2d1i.onrender.com
 
 **Resultado:** despliegue realizado correctamente. La aplicación está publicada en Render y ha establecido conexión con MongoDB Atlas.
 
+
+### Prueba 28. GET /recintos — API desplegada en Render
+
+**Objetivo:** comprobar que la API REST publicada en Render responde correctamente y recupera los datos almacenados en MongoDB Atlas.
+
+**Petición:**
+
+```bash
+curl -i https://practica1-daw-2dl1.onrender.com/recintos
+```
+
+**Respuesta obtenida:**
+
+- Código HTTP: `200 OK`.
+- `ok: true`.
+- `resultado`: listado de recintos registrados.
+- Recinto recuperado: Palacio de Congresos (Sevilla).
+
+**Captura de la prueba:**
+
+![Prueba 28 - GET recintos desde Render](img/prueba28-render-get-recintos.png)
+
+**Resultado:** prueba superada. Se confirma el funcionamiento público de la API REST y su conexión con MongoDB Atlas.
+
